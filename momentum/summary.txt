@@ -1,0 +1,28 @@
+const를 항상 쓰고 수정이 필요하면 let var은 절대 사용하지 말 것
+객체 안의 값을 바꿀 때는 const 상관 없음
+
+null : 그 변수에 아무것도 없음(절대 자연적으로 발생하지 않음
+우리가 변수에 아무것도 없다는 것을 확실히 하기 위해 쓰는 것)
+undefined : 변수에 값이 정의되지 않은 것
+즉 정리하자면 null은 변수를 선언하고 빈 값을 할당한 상태,
+undefined는 변수를 선언하고 값을 할당하지 않은 상태
+undefined는 자료형이 없는 상태
+
+prompt라는 함수는 자바스크립트의 실행을 멈춘다 => 사용 안 함(오래된 방법)
+
+document는 웹사이트를 의미 => jS로 html을 컨트롤 가능
+
+querySelector은 element를 css 방식으로 검색할 수 있다(.클래스, #아이디)
+하나의 element만을 return한다(가장 앞에 있는)
+다 찾고 싶으면 querySeletorAll을 사용하면 됨 => 전체를 array로 반환
+
+자바스크립트에서 style을 변경하는 것은 좋지 않다 css에서 변경하기
+
+자주 사용되는 문자열 등은 변수에 담아서 사용하자
+
+자바스크립트로 class 이름을 변경하지 말 것 classList.contains() 사용
+
+classList.toggle 사용 시 코드를 줄일 수 있다
+
+
+
