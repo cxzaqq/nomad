@@ -24,5 +24,13 @@ querySelector은 element를 css 방식으로 검색할 수 있다(.클래스, #�
 
 classList.toggle 사용 시 코드를 줄일 수 있다
 
+form submit은 자동으로 새로고침 됨(엔터, 클릭)
+.preventDefault()로 막을 수 있음
+alert 또한 동작을 막는데 그래서 안 씀
+
+일반적으로 string만 포함된 변수는 대문자로 표기하고 사용
+
+
+
 
 
