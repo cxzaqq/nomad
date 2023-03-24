@@ -1,5 +1,5 @@
 import http from "http";
-import WebSocket from "ws";
+import SocketIO from "socket.io";
 import express from "express";
 
 const app = express();
@@ -14,27 +14,44 @@ app.get("/*", (_, res) => res.redirect("/"));
 const handleListen = () => console.log(`Listening on http://localhost:3000`);
 
 const server = http.createServer(app);
-//http와 ws 두 개의 프로토콜을 같은 포트를 공유할 수 있게
-const wss = new WebSocket.Server({server});
+const wsServer = SocketIO(server);
 
-const sockets = [];
-
-wss.on("connection", (socket) => {
-    sockets.push(socket);
-    socket["nickname"] = "Anon";
-    console.log("Connected to Browser");
-    socket.on("close", () => console.log("Disconnected"));
-    socket.on("message", (msg) => {
-        const message = JSON.parse(msg);
-        switch(message.type){
-            case "new_message":
-                sockets.forEach(aSocket => aSocket.send(`${socket.nickname}: ${message.payload}`));
-                break;
-            case "nickname":
-                socket["nickname"] = message.payload;
-                break;
-        }
+wsServer.on("connection", socket => {
+    socket.onAny((event) => {
+        console.log(`Socket Event: ${event}`);
+    })
+    socket.on("enter_room", (roomName, done) => {
+        socket.join(roomName);
+        done();
+        socket.to(roomName).emit("welcome");
     });
+    socket.on("disconnecting", () => {
+        socket.rooms.forEach(room => socket.to(room).emit("bye"));
+    });
+    socket.on("new_message", (msg, room, done) => {
+        socket.to(room).emit("new_message", msg);
+        done();
+    })
 });
+
+// const sockets = [];
+
+// wss.on("connection", (socket) => {
+//     sockets.push(socket);
+//     socket["nickname"] = "Anon";
+//     console.log("Connected to Browser");
+//     socket.on("close", () => console.log("Disconnected"));
+//     socket.on("message", (msg) => {
+//         const message = JSON.parse(msg);
+//         switch(message.type){
+//             case "new_message":
+//                 sockets.forEach(aSocket => aSocket.send(`${socket.nickname}: ${message.payload}`));
+//                 break;
+//             case "nickname":
+//                 socket["nickname"] = message.payload;
+//                 break;
+//         }
+//     });
+// });
 
 server.listen(3000, handleListen);
