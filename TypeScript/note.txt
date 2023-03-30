@@ -1,4 +1,6 @@
 ///정리///
+npm i -g typescript
+tsc --init
 
 runtime error : 콘솔 안에서 일어나는 에러
 이는 유저의 컴퓨터에서 코드가 실행될 때만 일어나는 에러일 수 있는데
@@ -116,6 +118,99 @@ function hello(name: string|number){
         name // 타입: number
     } else {
         name // 타입: never 실행되면 안 됨
+    }
+}
+*/
+
+함수의 call signature 타입을 만들 수 있다
+call signature? 함수가 인자로 무엇을 받고 무엇을 반환하는지 알려주는 것
+
+/*
+type Add = (a: number, b: number) => number;
+
+//같은 거
+type Add = {
+    (a: number, b: number) :number
+}
+
+const add:Add = (a, b) => a + b;
+*/
+
+overloading?
+보통 다른 사람들이 만든 외부 라이브러리를 사용하는데 이런 패키지나
+라이브러리는 오버로딩을 많이 사용함
+
+오버로딩은 함수가 서로 다른 여러개의 call signatures를 가지고 있을 때 발생
+예시
+/*
+//Nextjs에서 사용하는 실제 예시
+Router.push({
+    path: "/home",
+    state: 1
+})
+
+.push("/home")
+*/
+string 혹은 obj로 가능
+해결법
+/*
+type Config = {
+    path: string,
+    state: object
+}
+
+type Push = {
+    (path: string): void
+    (config: Config): void
+}
+
+const push: Push = (config) => {
+    if(typeof config === "string) ...
+    ...
+}
+*/
+
+타입이 아닌 파라미터의 개수가 다를 때?
+/*
+type Add = {
+    (a: number, b: number) :number,
+    (a: number, b: number, c: number): number,
+}
+
+const add: Add = (a, b, c?: number) => {
+    if(c) return a + b + c;
+    return a + b;
+}
+*/
+
+다향성(polymorphism)? generic?
+call signature를 작성 시 들어올 확실한 타입을 모를 때 generic 사용
+/*
+type SuperPrint = {
+    <T>(a: T[]): T
+}
+
+const superPrint: SuperPrint = (a) => a[0];
+
+//같은 거
+function superPrint<T>(a: T[])l{
+    return a[0];
+}
+*/
+타입스크립트가 입력값을 보고 call signature를 생성
+any는 에러 발생 가능 그래서 any 안 쓰고 generic 사용
+제네릭 이름은 마음대로 설정 가능(단, 대문자로 시작)
+
+/*
+type Player<E> = {
+    name: string
+    extraInfo: E
+}
+
+const nico: Player<{favFood: string}> = {
+    name: "nico",
+    extraInfo: {
+        favFood: "kimchi"
     }
 }
 */
