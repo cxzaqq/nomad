@@ -1,15 +1,28 @@
-// type SuperPrint = {
-//     (arr: number[]): void
-//     (arr: boolean[]): void
-//     (arr: string[]): void
-// }
-
-type SuperPrint = {
-    <T>(a: T[]): T
+interface SStorage<T> {
+    [key: string]: T
 }
 
-const superPrint: SuperPrint = (a) => a[0];
+class LocalStorage<T> {
+    private storage: SStorage<T> = {}
+    set(key: string, value: T){
+        this.storage[key] = value;
+    }
+    remove(key: string){
+        delete this.storage[key];
+    }
+    get(key: string): T {
+        return this.storage[key];
+    }
+    clear(){
+        this.storage = {};
+    }
+}
 
-superPrint([1,2,3,4]);
-superPrint([true, true, false]);
-superPrint(["a", "b"]);
+const stringsStorage = new LocalStorage<string>()
+
+stringsStorage.get("key")
+stringsStorage.set("hello", "how")
+
+const booleansStorage = new LocalStorage<boolean>();
+booleansStorage.get("xxx");
+booleansStorage.set("hello", true)

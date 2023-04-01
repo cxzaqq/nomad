@@ -1,6 +1,7 @@
 ///정리///
 npm i -g typescript
 tsc --init
+tsc 파일명
 
 runtime error : 콘솔 안에서 일어나는 에러
 이는 유저의 컴퓨터에서 코드가 실행될 때만 일어나는 에러일 수 있는데
@@ -214,3 +215,60 @@ const nico: Player<{favFood: string}> = {
     }
 }
 */
+
+추상 클래스? 오직 다른 곳에서 상속받을 수 있는 클래스
+직접 새로운 인스턴스를 만들 수는 없다
+
+추상메소드는 추상 클래스를 상속받는 모든 것들이 구현해야 하는 메소드를 의미
+추상메소드는 구현이 되어있지 않은 메소드 call signature만 가지고 있다
+추상메소드가 있는 경우 추상 클래스를 상속받는 클래스에서 추상 메소드를 구현해야 함
+
+
+다른 자식 클래서에서 필드를 사용하고 싶다면 private이 아닌 protected를 사용
+외부에서는 보호받지만 상속된 인스턴스에서는 사용 가능
+
+
+/*
+type Words = {
+    [key: string]: string
+}
+*/
+Words 타입이 string만을 property로 가지는 오브젝트라는 것
+이렇게 사용하면 제한된 property 혹은 key를 가지는 타입을 정의해주는 방법
+
+/*
+class Dict{
+    private words: Words
+    constructor(){
+        this.words = {}
+    }
+    add(word: Word){
+        ...
+    }
+}
+*/
+property가 constructor부터 바로 초기화되지 않음 => 수동으로 초기화
+클래스를 타입처럼 사용 가능
+
+타입을 콘크리트 타입이 아닌 사용자 지정 가능
+/*
+type Team = "red" | "blue" | "yellow"
+
+type Player = {
+    team: Team,
+    ..
+}
+*/
+
+인터페이스는 오직 한가지 용도만을 가지고 있다
+오브젝트의 모양을 특정해주는 것 => 타입이 더 많은 기능을 할 수 있다
+인터페이스는 같은 인터페이스에 다른 이름을 가진 property들을 쌓을 수 있다
+인터페이스는 컴파일 하면 js로 바뀌지 않고 사라짐
+인터페이스를 상속할 때 extends가 아닌 implements를 사용하면 코드가 더
+가벼워짐(파일 사이즈가 작아짐)
+(추상 클래스 상속 X => 인터페이스 상속 O)
+인터페이스를 상속할 때에는 property를 private으로 사용 불가
+인터페이스도 타입으로 사용 가능
+
+클래스나 오브젝트의 모양을 정의하고 싶으면 인터페이스, 그 외 모든 경우 type사용
+
