@@ -1,3 +1,1 @@
-import {init, exit} from "myPackage";
-
-exit
+import {init, exit} from "./myPackage";

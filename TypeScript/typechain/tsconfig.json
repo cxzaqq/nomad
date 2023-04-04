@@ -11,6 +11,7 @@
         "lib": ["ES6", "DOM"],
         //엄격한 타입 검사 옵션 활성화
         "strict": true,
-
+        "allowJs": true,
+        
     }
 }
