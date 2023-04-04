@@ -272,3 +272,12 @@ type Player = {
 
 클래스나 오브젝트의 모양을 정의하고 싶으면 인터페이스, 그 외 모든 경우 type사용
 
+static function?
+클래스 안에서 사용하는 함수인데 클래스 인스턴스가 없어도
+부를 수 있는 함수
+
+DefinitelyTyde
+타입 정의로 이루어진 레포지토리
+npm i -D @types/node : 노드 관련 타입 정의 패키지 다운
+
+자세한 typescript를 보려면 TypeScript Handbook 확인
