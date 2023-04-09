@@ -21,3 +21,40 @@ POST: 정보 생성
 PUT: 정보 업데이트
 DELETE: 정보 삭제
 
+
+근본적으로 이 기술이 해결하려는 문제가 무엇인지 아는 것이 중요하다
+graphql API는 rest API에 대한 직접적인 해결책임
+
+rest API는 큰 두 가지 문제를 갖고 있다
+1. over-fetching
+내가 그 data를 쓰든 말든 너무 많은 data를 받는 것
+=> graphql은 필요한 data만을 요청한다
+
+2. under-fetching
+한 번의 request로 원하는 데이터를 모두 얻을 수 없다. 두 번 이상의 요청이 필요
+=> graphql은 한 번의 request로 원하는 정보를 받을 수 있다
+
+apollo server?
+graphql을 이해하는 서버
+
+사용자가 요청할 수 있도록 하고 싶은 모든 건
+type Query 안에 있어야 함
+
+scalar type은 graphql에 내장되어 있음
+rest에서 POST는 graphql에서 type Mutation{}이다
+gql은 rest가 사용하는 http 메소드와 다르게 query, mutation 이렇게
+두 개만 있다
+
+타입 옆에 !를 붙이면 Non Nullable Fields라는 것
+
+query에서 인자를 받는다면 resolves에서 그것은 항상 두 번재 인자임
+첫번째 인자인 root는 parent
+
+""" 설명 """
+=> apollo studio에서 자세한 설명 기입 가능
+
+node-fetch를 이용해서 fetch api를 노드에서 사용 가능
+그리고 이를 이용해 rest api를 graphql로 감쌀 수 있다
+
+만약 데이터베이스가 있다면 hasura에 연결 시 모든 table에 대한 graphql api를
+만들어준다
