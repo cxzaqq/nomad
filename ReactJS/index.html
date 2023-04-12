@@ -3,95 +3,31 @@
     <body>
         <div id="root"></div>
     </body>
-    <script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react@17.0.2/umd/react.development.js"></script>
     <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://unpkg.com/prop-types@15.7.2/prop-types.js"></script>
     <script type="text/babel">
-        function TimeConverter() {
-            const [amount, setAmount] = React.useState(0);
-            const [inverted, setInverted] = React.useState(false);
-            const onChange = (event) => {
-                setAmount(event.target.value)
-            }
-            const reset = () => setAmount(0);
-            const onFlip = () => {
-                setInverted(current => !current);
-                reset();
-            };
-            return (
-                <div>
-                    <div>
-                        <label htmlFor="minutes">Minutes</label>
-                        <input
-                            value={inverted ? amount * 60 : amount} id="minutes" placeholder="Minutes" type="number"
-                            onChange={onChange} disabled={inverted}
-                        />
-                    </div>
-                    <div>
-                        <label htmlFor="hours">Hours</label>
-                        <input
-                            value={inverted ? amount : amount / 60}
-                            id="hours" placeholder="Hours" type="number"
-                            disabled={!inverted} onChange={onChange}
-                        />
-                    </div>
-                    <button onClick={reset}>Reset</button>
-                    <button onClick={onFlip}>{inverted ? "Turn back" : "Invert"}</button>
-                    </div>
-            );
+        function Btn({text, fontSize = 12}){
+            return <button
+            style={{
+                backgroundColor: "tomato",
+                color: "white",
+                padding:"10px 20px",
+                border: 0,
+                borderRadius: 10,
+                fontSize,
+            }}>{text}</button>
         }
-        function DistanceConverter(){
-            const [amount, setAmount] = React.useState(0);
-            const [inverted, setInverted] = React.useState(false);
-            const onChange = (event) => {
-                setAmount(event.target.value);
-            };
-            const invert = () => {
-                setInverted(current => !current);
-                reset();
-            };
-            const reset = () => {
-                setAmount(0);
-            };
-            return (
-                <div>
-                    <div>
-                        <label htmlFor="km">KM</label>
-                        <input
-                        value = {inverted ? amount * 1.609 : amount}
-                            id="km" placeholder="KM" type="number"
-                            onChange={onChange} disabled={inverted}
-                        />
-                    </div>
-                    <div>
-                        <label htmlFor="miles">MILES</label>
-                        <input
-                            value = {inverted ? amount : amount / 1.609}
-                            id="miles" placeholder="MILES" type="number"
-                            disabled={!inverted} onChange={onChange}
-                        />
-                    </div>
-                    <div>
-                        <button onClick={reset}>Reset</button>
-                        <button onClick={invert}>Invert</button>
-                    </div>
-                </div>
-            );
+        Btn.propTypes = {
+            text: PropTypes.string.isRequired,
+            fontSize: PropTypes.number,
         }
         function App() {
-            const [index, setIndex] = React.useState("0");
-            const onSelect = (event) => {
-                setIndex(event.target.value);
-            }
             return (
                 <div>
-                    <h1>Super Converter</h1>
-                    <select value={index} onChange = {onSelect}>
-                        <option value="0">Time</option>
-                        <option value="1">Distance</option>
-                    </select>
-                    <hr/>
-                    {index === "0" ? <TimeConverter /> : <DistanceConverter />}
+                    <Btn text="save Changes" fontSize={18} />
+                    <Btn text="continue" />
                 </div>
             );
         }

@@ -2,3 +2,16 @@ js로 구현 시 태그 등 모든 것이 업데이트
 react js로 구현 시 바뀌는 부분만 업데이트
 
 useState 사용하면 modifier가 자동으로 리랜더링 해줌
+
+props에 function도 보낼 수 있다 단, arg로 보낸 것이기 때문에
+실행하려면 자식 쪽에 다시 써줘야 함
+
+불필요한 re-render는 React.memo()로 관리할 수 있다
+이는 props가 바뀌지 않는 한 re-render를 막는 것임
+
+propTypes를 사용하면 prop의 타입을 검사할 수 있다
+.isRequired를 사용하면 필수 prop이라고 mark할 수 있다
+
+자바스크립트 문법을 활욯하여 정의되지 않은 변수에 관한 기본값을 줄 수 있다
+function Btn({text, fontSize = 50})...
+
