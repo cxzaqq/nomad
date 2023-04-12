@@ -7,20 +7,95 @@
     <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <script type="text/babel">
-        const root = document.getElementById("root");
-        function App() {
-            const [counter, setCounter] = React.useState(0);
-            const onClick = () => {
-                // setCounter(counter + 1); 예상치 못한 업데이트 가능
-                setCounter(current => current + 1);
+        function TimeConverter() {
+            const [amount, setAmount] = React.useState(0);
+            const [inverted, setInverted] = React.useState(false);
+            const onChange = (event) => {
+                setAmount(event.target.value)
+            }
+            const reset = () => setAmount(0);
+            const onFlip = () => {
+                setInverted(current => !current);
+                reset();
             };
             return (
                 <div>
-                    <h3>Total clicks: {counter}</h3>
-                    <button onClick={onClick}>Click me</button>
+                    <div>
+                        <label htmlFor="minutes">Minutes</label>
+                        <input
+                            value={inverted ? amount * 60 : amount} id="minutes" placeholder="Minutes" type="number"
+                            onChange={onChange} disabled={inverted}
+                        />
+                    </div>
+                    <div>
+                        <label htmlFor="hours">Hours</label>
+                        <input
+                            value={inverted ? amount : amount / 60}
+                            id="hours" placeholder="Hours" type="number"
+                            disabled={!inverted} onChange={onChange}
+                        />
+                    </div>
+                    <button onClick={reset}>Reset</button>
+                    <button onClick={onFlip}>{inverted ? "Turn back" : "Invert"}</button>
+                    </div>
+            );
+        }
+        function DistanceConverter(){
+            const [amount, setAmount] = React.useState(0);
+            const [inverted, setInverted] = React.useState(false);
+            const onChange = (event) => {
+                setAmount(event.target.value);
+            };
+            const invert = () => {
+                setInverted(current => !current);
+                reset();
+            };
+            const reset = () => {
+                setAmount(0);
+            };
+            return (
+                <div>
+                    <div>
+                        <label htmlFor="km">KM</label>
+                        <input
+                        value = {inverted ? amount * 1.609 : amount}
+                            id="km" placeholder="KM" type="number"
+                            onChange={onChange} disabled={inverted}
+                        />
+                    </div>
+                    <div>
+                        <label htmlFor="miles">MILES</label>
+                        <input
+                            value = {inverted ? amount : amount / 1.609}
+                            id="miles" placeholder="MILES" type="number"
+                            disabled={!inverted} onChange={onChange}
+                        />
+                    </div>
+                    <div>
+                        <button onClick={reset}>Reset</button>
+                        <button onClick={invert}>Invert</button>
+                    </div>
                 </div>
             );
         }
+        function App() {
+            const [index, setIndex] = React.useState("0");
+            const onSelect = (event) => {
+                setIndex(event.target.value);
+            }
+            return (
+                <div>
+                    <h1>Super Converter</h1>
+                    <select value={index} onChange = {onSelect}>
+                        <option value="0">Time</option>
+                        <option value="1">Distance</option>
+                    </select>
+                    <hr/>
+                    {index === "0" ? <TimeConverter /> : <DistanceConverter />}
+                </div>
+            );
+        }
+        const root = document.getElementById("root");
         ReactDOM.render(<App />, root);
     </script>
 </html>
