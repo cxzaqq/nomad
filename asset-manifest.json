@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.js": "/nomad/react-app/static/js/main.3596ad1d.js",
-    "index.html": "/nomad/react-app/index.html",
-    "main.3596ad1d.js.map": "/nomad/react-app/static/js/main.3596ad1d.js.map"
+    "main.js": "/nomad/static/js/main.3596ad1d.js",
+    "index.html": "/nomad/index.html",
+    "main.3596ad1d.js.map": "/nomad/static/js/main.3596ad1d.js.map"
   },
   "entrypoints": [
     "static/js/main.3596ad1d.js"
