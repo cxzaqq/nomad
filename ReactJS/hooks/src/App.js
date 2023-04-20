@@ -46,14 +46,61 @@ const titleUpdate = useTitle("Loading...");
   );
   */
 
-  /*////////////////////////////
-
+  /*////////////////////////////useClick
+const sayHello = () => console.log("hello");
+  const title = useClick(sayHello);
+  return (
+    <div className="App">
+      <h1 ref={title}>Hi</h1>
+    </div>
+  );
   */
 
- /*////////////////////////////
-
+ /*////////////////////////////useConfirm
+const deleteWorld = () => console.log("delete");
+  const confirmDelete = useConfirm("Are you sure", deleteWorld);
+  return (
+    <div className="App">
+      <button onClick={confirmDelete}>Delete the world</button>
+    </div>
+  );
  */
 
+/*////////////////////////////usePreventLeave
+ const { enablePrevent, disablePrevent } = usePreventLeave();
+  return (
+    <div className="App">
+      <button onClick={enablePrevent}>Protect</button>
+      <button onClick={disablePrevent}>Unprotect</button>
+    </div>
+  );
+*/
+
+/*////////////////////////////useBeforeLeave
+const begForLife = () => console.log("plz don't leave");
+  useBeforeLeave(begForLife);
+  return <div className="App"></div>;
+*/
+
+/*////////////////////////////useFadeIn
+const fadeInH1 = useFadeIn(1, 2);
+  const fadeInP = useFadeIn(5, 10);
+  return (
+    <div className="App">
+      <h1 {...fadeInH1}>hello</h1>
+      <p {...fadeInP}>lalalalalalal</p>
+    </div>
+  );
+*/
+
+/*////////////////////////////
+
+*/
+
+/*////////////////////////////
+
+*/
+
 /*////////////////////////////
 
 */
@@ -65,7 +112,6 @@ const titleUpdate = useTitle("Loading...");
 /*////////////////////////////
 
 */
-
 
 }
 
