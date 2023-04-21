@@ -1,7 +1,3 @@
-import useInput from './hooks/useInput';
-import useTabs from './hooks/useTabs';
-import useTitle from './hooks/useTitle';
-
 function App() {
   /*////////////////////////////useInput
   const maxlen = (value) => value.length <= 10;
@@ -93,24 +89,66 @@ const fadeInH1 = useFadeIn(1, 2);
   );
 */
 
-/*////////////////////////////
-
+/*////////////////////////////useNetwork
+const handleNetworkChange = (online) => {
+    console.log(online ? "online" : "offline");
+  };
+  const onLine = useNetwork(handleNetworkChange);
+  return (
+    <div className="App">
+      <h1>{onLine ? "online" : "offline"}</h1>
+    </div>
+  );
 */
 
-/*////////////////////////////
-
+/*////////////////////////////useScroll
+const { y } = useScroll();
+  return (
+    <div className="App" style={{ height: "200vh" }}>
+      <h1 style={{ position: "fixed", color: y > 100 ? "red" : "blue" }}>Hi</h1>
+    </div>
+  );
 */
 
-/*////////////////////////////
-
+/*////////////////////////////useFullscreen
+const onFullS = (isFull) => {
+    console.log(isFull ? "full" : "small");
+  };
+  const { element, triggerFull, exitFull } = useFullscreen(onFullS);
+  return (
+    <div className="App">
+      <div ref={element}>
+        <img src="https://i.ibb.co/R6RwNxx/grape.jpg" alt="grape" width="250" />
+        <button onClick={exitFull}>exit fullscreen</button>
+      </div>
+      <button onClick={triggerFull}>Make fullscreen</button>
+    </div>
+  );
 */
 
-/*////////////////////////////
-
+/*////////////////////////////useNotification
+const triggerNotif = useNotification("Hi", { body: "body" });
+  return (
+    <div className="App">
+      <button onClick={triggerNotif}>Hello</button>
+    </div>
+  );
 */
 
-/*////////////////////////////
-
+/*////////////////////////////useAxios
+const { loading, data, error, refetch } = useAxios({
+    url: "https://yts.mx/api/v2/list_movies.json"
+  });
+  console.log(
+    `Loading: ${loading}\ndata: ${JSON.stringify(data)}\nerror: ${error}`
+  );
+  return (
+    <div className="App">
+      <h1>{data && data.status}</h1>
+      <h2>{loading && "Loading.."}</h2>
+      <button onClick={refetch}>Refetch</button>
+    </div>
+  );
 */
 
 }
