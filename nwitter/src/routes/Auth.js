@@ -1,10 +1,17 @@
-import { authService } from "../fBase";
 import React, { useState } from "react";
+import {
+    getAuth,
+    signInWithEmailAndPassword,
+    createUserWithEmailAndPassword,
+    signInWithPopup,
+    GoogleAuthProvider
+  } from "firebase/auth";
 
 const Auth = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const[newAccount, setNewAccount] = useState(true);
+    const [error, setError] = useState("");
     const onChange = (event) => {
         const {target: {name, value}} = event;
         if(name === "email"){
@@ -13,37 +20,50 @@ const Auth = () => {
             setPassword(value);
         }
     }
-    const onSubmit = async(event) => {
+    const onSubmit = async (event) => {
         event.preventDefault();
+        const auth = getAuth();
+        let data;
         try{
-            let data;
             if(newAccount){
-                data = await authService.createUserWithEmailAndPassword(
-                    email, password
-                );
+                data = await createUserWithEmailAndPassword(
+                    auth, email, password
+                )
             }else{
-                data = await authService.signInWithEmailAndPassword(
-                    email, password
-                );
+                data = await signInWithEmailAndPassword(
+                    auth, email, password
+                )
             }
-            console.log(data);
-        } catch(error){
-            console.log(error);
-        }
-        
+        }catch(error){
+            setError(error.message);
+        } 
     }
+
+    const toggleAccount = () => setNewAccount((prev) => !prev);
+
+    const onSocialClick = async (event) => {
+        const { target:{name} } = event;
+        let provider;
+        if(name === "google"){
+            provider = new GoogleAuthProvider();
+        }
+        await signInWithPopup(getAuth(), provider);
+    }
+
     return (
         <div>
             <form onSubmit={onSubmit}>
-                <input onChange={onChange} name="email" type="text" placeholder="Email" required value={email} />
-                <input onChange={onChange} name="password" type="password" placeholder="Password" required value={password} />
-                <input type="submit" value={newAccount ? "Create Account" : "Log In"} />
+                <input onChange={onChange} name="email" type="text" placeholder="Email" value={email} required />
+                <input onChange={onChange} name="password" type="password" placeholder="Passowrd" value={password} required />
+                <input type="submit" value={newAccount? "Create Account" : "Sign In"} />
+                {error}
             </form>
-        <div>
-            <button>Continue with Google</button>
-        </div>
+            <span onClick={toggleAccount}>{newAccount ? "Log In" : "Create Account"}</span>
+            <div>
+                <button onClick={onSocialClick} name="google">Continue with google</button>
+            </div>
         </div>
     )
-};
+}
 
 export default Auth;
