@@ -1,0 +1,87 @@
+///---///
+let a: string = "hello";
+let a = "hello";
+///---///
+TS의 typechecker가 타입을 추론해서 둘 다 되는데 후자를 추천 왜?
+더 쉽고 코드도 짧아서 가독성이 좋음 추론하게 두자
+
+
+///---///
+let a: number[] = [];
+///---///
+배열 요소의 타입 정의
+
+///---///
+const player: {
+    name: string,
+    age?: number,
+} = {
+    name: "yoon",
+}
+///---///
+object의 타입 정의 ?를 추가하면 optional type이 됨
+즉 age는 number 혹은 undefined임
+
+///---///
+type Player = {
+    name: string,
+    age?: number
+}
+const yoon: Player = {
+    name:"yoon"
+}
+///---///
+Alias?
+타입 생성(첫 글자는 대문자)
+같은 요소를 갖는 여러 객체를 생성 시 편함
+
+///---///
+function playerMaker(name: string): Player{
+    return {
+        name
+    }
+};
+const plyaerMaker = (name: string): Player => ({
+    name
+});
+///---///
+함수 인자와 return 타입 정의
+
+///---///
+type Player = {
+    readonly name: String
+    age?: Number
+}
+const numbers: readonly number[] = [1, 2];
+///---///
+readonly를 추가하면 값을 바꿀 수 없다 기타 array.push()등도 불가
+
+///---///
+const player: [string, number, boolean] = ["1", 1, true];
+///---///
+항상 정해진 개수의 요소를 가져야하는 array를 지정할 수 있다
+또한 원하는 순서에 맞게 타입을 가져아 함(readonly와 합성 가능)
+
+///---///
+const a: any[] = ["1", 1, true];
+///---///
+type any를 사용 시 ts로부터 보호받을 수 없고 js가 됨(비추천)
+
+///---///
+
+///---///
+
+
+///---///
+
+///---///
+
+
+///---///
+
+///---///
+
+
+///---///
+
+///---///
