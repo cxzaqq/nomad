@@ -68,19 +68,102 @@ const a: any[] = ["1", 1, true];
 type any를 사용 시 ts로부터 보호받을 수 없고 js가 됨(비추천)
 
 ///---///
+let a: unknown;
+if(typeof a === 'number'){
+    let b = a + 1;
+}
+///---///
+그냥은 연산이 안 됨
+변수의 타입을 미리 알지 못할 때 사용
 
 ///---///
-
+function hello(){
+    console.log("*");
+}
+///---///
+이처럼 함수가 아무것도 return하지 않으면 void임
+따로 명시할 필요 없음
 
 ///---///
+function hello(name: string | number) {
+    if(typeof name === "string"){
+        //여기서 name은 string
+    } else if(type of name === "number"){
+        //여기서 name은 number
+    } else {
+        //여기서 name은 never => 작동하지 않을 코드
+    }
+}
+///---///
+never 타입(거의 사용 안 할 것임)
 
 ///---///
+type Add = (a: number, b: number) => number;
 
+const add: Add = (a, b) => a + b;
+///---///
+call signature? 함수를 어떻게 호출해야하는지 알려줌
+함수의 인자 타입과 반환 타입을 알려줌
 
 ///---///
+type Add = {
+    (a: number, b: number) : number
+    (a: number, b: string) : number
+}
+///---///
+overloading?
+함수가 여러개의 call signatures를 가지고 있을 때 발생
+다른 사람들이 만든 외부 라이브러리를 사용하는데
+이때 패키지나 라이브러리들은 오버로딩을 많이 사용함
 
 ///---///
+type Add = {
+    (a: number, b: number): number
+    (a: number, b: number, c: number): number
+}
 
+const add: Add = (a, b, c?: numbner) => {
+    if(c) return a + b + c;
+    return a + b;
+}
+///---///
+call signature의 파라미터 개수가 다를 때
+
+///---///
+type SuperPrint = {
+    (arr: number[]): void
+    (arr: boolean[]): void
+    ...
+}
+const superPrint: SuperPrint = (arr) => {
+    arr.forEach(i => console.log(i));
+}
+///---///
+이렇게 만들면 하나하나 다 추가해줘야 해서 귀찮다
+=> generic 사용(concrete type만 가능, 첫글자는 대문자)
+///---///
+type SuperPrint <T>(a: T[]) => T;
+const superPrint: SuperPrint = (arr) => arr[0];
+///---///
+generic을 사용하면 직접 타입을 명시하지 않아도 타입 스크립트가 유추해줌
+any를 사용하지 말 것
+라이브러리를 만들거나 다른 개발자가 사용할 기능을 개발하는 경우엔 제네릭이 유용하지만
+그 외 대부분의 경우에는 직접 작성할 일은 없을 것임
+///---///
+type Player<E> = {
+    name: string
+    extraInfo: E
+}
+const nico: Player<{favFood: string}> = {
+    name: "nico",
+    extraInfo: {
+        favFood: "kimchi"
+    }
+}
+
+function printNumbers(arr: Array<numnber>){}
+function printNumbers(arr: number[]){}//같은 표현
+///---///
 
 ///---///
 
