@@ -292,3 +292,16 @@ JSDoc?
 .js 파일에서 사용하는 주석으로 이루어진 문법
 실행 중인 코드에는 전혀 영향 없지만
 TS의 보호 기능을 활성화 할 수 있다
+
+npm i -D ts-node
+빌드 없이 타입스크립트를 실행할 수 있게 됨
+개발 환경에서만 쓰이는 패키지
+
+static 함수는 클래스 안에서 사용하는 함수인데
+클래스 인스턴스가 없어도 부를 수 있는 함수임
+
+DefinitelyTyped
+https://github.com/DefinitelyTyped/DefinitelyTyped
+TS 정의를 위한 레포지토리
+npm i -D @types/node
+=> node package에 필요한 타입 정의들을 받음

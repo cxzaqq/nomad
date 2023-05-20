@@ -5,6 +5,7 @@
     "target": "ES6",
     "lib": ["ES6"], //자동완성 기능 제공
     "strict": true,
-    "allowJs": true
+    "esModuleInterop": true,
+    "module": "CommonJS"
   }
 }
