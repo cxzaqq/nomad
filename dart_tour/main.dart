@@ -76,4 +76,30 @@ void main() {
     for (var friend in oldFriends) "❤️ $friend",
   ];
   print(newFriends);
+
+  //Maps
+  var player = {
+    //Map<String, Object> => key, value
+    'name': 'nico',
+    'xp': 19.99,
+    'superpower': false,
+  };
+  //이런 것도 가능. 근데 보통 이 방법을 추천하진 않고 class를 사용하는 것을 추천
+  Map<List<int>, bool> mapTest = {
+    [1, 2, 3]: true,
+  };
+
+  List<Map<String, Object>> players = [
+    {
+      'name': 'nico',
+      'xp': 19.99,
+    },
+    {
+      'name': 'nico',
+      'xp': 19.99,
+    }
+  ];
+
+  //Sets 요소들 간 중복 X
+  var numbers2 = {1, 2, 3, 4}; // Set<int> numbers2 = {1, 2, 3, 4};
 }
