@@ -60,5 +60,11 @@ void main() {
     4,
     if (giveMeFive) 5,
   ];
-  print(numbers1);
+
+
+  //String Interpolation
+  var name9 = "yoon";
+  var age = 10;
+  var greeting = "Hello everyone, my name is $name9 and I'm ${age + 2}";
+  var greeting1 = 'Hello everyone, my name is $name9 and I\'m ${age + 2}';
 }
