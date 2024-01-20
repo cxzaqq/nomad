@@ -61,10 +61,19 @@ void main() {
     if (giveMeFive) 5,
   ];
 
-
   //String Interpolation
   var name9 = "yoon";
   var age = 10;
   var greeting = "Hello everyone, my name is $name9 and I'm ${age + 2}";
   var greeting1 = 'Hello everyone, my name is $name9 and I\'m ${age + 2}';
+
+  //Collection for
+  var oldFriends = ['nico', 'lynn'];
+  var newFriends = [
+    'lewis',
+    'ralph',
+    'darren',
+    for (var friend in oldFriends) "❤️ $friend",
+  ];
+  print(newFriends);
 }
