@@ -38,4 +38,27 @@ void main() {
   //예를 들어 API 키를 const로 선언하면 절대 바뀌지 않고 컴파일 될 때 그 값을 알고 있을 것임.
   //즉 앱스토어에 앱을 올리기 전부터 알고 있는 값. 사용자 요청 값ㄴㄴ 이때는 final 혹은 var 사용
   const name8 = "yoon";
+
+  //num은 정수도 소수도 된다
+  num x = 12;
+  x = 1.1;
+
+  //Lists
+  var numbers = [
+    1,
+    2,
+    3,
+    4,
+  ]; // === List<int> numbers = [1, 2, 3, 4,];
+
+  //giveMeFive가 true이면 numbers1에 5가 포함됨
+  var giveMeFive = true;
+  var numbers1 = [
+    1,
+    2,
+    3,
+    4,
+    if (giveMeFive) 5,
+  ];
+  print(numbers1);
 }
