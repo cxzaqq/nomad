@@ -29,6 +29,9 @@ String sayHello4(String name, int age, [String? country = "wakanda"]) {
   return "Hello $name, you are $age, and you come from $country";
 }
 
+//left ?? right => left가 null이면 right 반환 아니면 left 반환
+String capitalizeName2(String? name) => name?.toUpperCase() ?? 'ANON';
+
 void main() {
   //좋은 방법은 아님. 직관적이지 않다
   print(sayHello1("yoon", 10, "Kor"));
@@ -37,4 +40,12 @@ void main() {
   print(sayHello3(age: 10, country: "Kor", name: "yoon"));
   //optinal positional 순서 중요.
   print(sayHello4("yoon", 12));
+
+  print(capitalizeName2('yoon'));
+  print(capitalizeName2(null));
+
+  //name ??= 'yoon' => name이 null이면 'yoon'을 넣어라
+  String? name;
+  name ??= 'yoon';
+  print(name);
 }
