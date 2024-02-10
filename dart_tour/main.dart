@@ -32,6 +32,18 @@ String sayHello4(String name, int age, [String? country = "wakanda"]) {
 //left ?? right => left가 null이면 right 반환 아니면 left 반환
 String capitalizeName2(String? name) => name?.toUpperCase() ?? 'ANON';
 
+
+typedef ListOfInts = List<int>;
+ListOfInts reverseListOfNumbers(ListOfInts list) {
+  var reversed = list.reversed;
+  return reversed.toList();
+}
+
+typedef UserInfo = Map<String, String>;
+String sayHi(UserInfo userInfo) {
+  return "Hi ${userInfo['name']}";
+}
+
 void main() {
   //좋은 방법은 아님. 직관적이지 않다
   print(sayHello1("yoon", 10, "Kor"));
@@ -48,4 +60,7 @@ void main() {
   String? name;
   name ??= 'yoon';
   print(name);
+
+  print(reverseListOfNumbers([1, 2, 3]));
+  print(sayHi({"name": "yoon"}));
 }
