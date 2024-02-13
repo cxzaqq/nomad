@@ -1,67 +1,31 @@
-String sayHello(String name) {
-  return "Hello $name nice to meet you";
+class Player {
+  //final 사용 시 변경 불가
+  final String name;
+  int xp;
+
+  //constructor method의 이름은 class의 이름과 같아야 함. arguments 위치 중요, 위에 타입을 정했기 때문에 따로 지정 필요 없음
+  Player(this.name, this.xp);
+
+  //class method 내에서 this는 사용하지 않는 것이 권고됨
+  void sayHello() {
+    print("Hi my name is $name and my xp is $xp");
+  }
 }
 
-/*
-arrow 사용 가능
-String sayHello1(String name) => "Hello $name nice to meet you";
+/* 위 constructor가 축약형
+class Player {
+  //late 사용 시 나중에 값을 받는다는 것을 의미
+  late final String name;
+  late int xp;
+
+  Player(String name, int xp) {
+    this.name = name;
+    this.xp = xp
+  };
+}
 */
 
-//positional parameters 순서 중요
-String sayHello1(String name, int age, String country) {
-  return "Hello $name, you are $age, and you come from $country";
-}
-
-//named parameters 사용 시 null safety 때문에 기본값 설정해야 함. 순서 중요 X.
-String sayHello2(
-    {String name = "anon", int age = 99, String country = "wakanda"}) {
-  return "Hello $name, you are $age, and you come from $country";
-}
-
-//근데 default value가 아닌 유저에게 직접 입력을 받고 싶다면. 순서 중요 X.
-String sayHello3(
-    {required String name, required int age, required String country}) {
-  return "Hello $name, you are $age, and you come from $country";
-}
-
-//parameter를 optional positional로 설정하고 싶다면. 순서 중요. 근데 자주 사용 안 함.
-String sayHello4(String name, int age, [String? country = "wakanda"]) {
-  return "Hello $name, you are $age, and you come from $country";
-}
-
-//left ?? right => left가 null이면 right 반환 아니면 left 반환
-String capitalizeName2(String? name) => name?.toUpperCase() ?? 'ANON';
-
-
-typedef ListOfInts = List<int>;
-ListOfInts reverseListOfNumbers(ListOfInts list) {
-  var reversed = list.reversed;
-  return reversed.toList();
-}
-
-typedef UserInfo = Map<String, String>;
-String sayHi(UserInfo userInfo) {
-  return "Hi ${userInfo['name']}";
-}
-
 void main() {
-  //좋은 방법은 아님. 직관적이지 않다
-  print(sayHello1("yoon", 10, "Kor"));
-  //대신 이렇게 순서는 상관 없음
-  print(sayHello2(age: 10, country: "Kor"));
-  print(sayHello3(age: 10, country: "Kor", name: "yoon"));
-  //optinal positional 순서 중요.
-  print(sayHello4("yoon", 12));
-
-  print(capitalizeName2('yoon'));
-  print(capitalizeName2(null));
-
-  //name ??= 'yoon' => name이 null이면 'yoon'을 넣어라
-  String? name;
-  name ??= 'yoon';
-  print(name);
-
-  print(reverseListOfNumbers([1, 2, 3]));
-  print(sayHi({"name": "yoon"}));
-  //#3
+  var player = Player("yoon", 1500);
+  player.sayHello();
 }
