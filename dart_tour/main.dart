@@ -1,7 +1,12 @@
+//Human을 상속받는 클래스가 가지고 있어야 하는 메소드를 정의
+abstract class Human {
+  void walk();
+}
+
 //실수를 줄여줌
 enum Team { red, blue }
 
-class Player {
+class Player extends Human {
   //final 사용 시 변경 불가
   String name;
   int xp;
@@ -40,6 +45,10 @@ class Player {
       : name = playerJson['name'],
         xp = playerJson['xp'],
         team = playerJson['team'];
+
+  void walk() {
+    print('walking..');
+  }
 }
 
 /* 위 constructor가 축약형
@@ -67,5 +76,6 @@ void main() {
     ..name = 'J'
     ..xp = 1500
     ..team = Team.blue
-    ..sayHello();
+    ..sayHello()
+    ..walk();
 }
