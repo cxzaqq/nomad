@@ -1,6 +1,6 @@
 class Player {
   //final 사용 시 변경 불가
-  final String name;
+  String name;
   int xp;
   String team;
 
@@ -53,26 +53,16 @@ class Player {
 */
 
 void main() {
-  var apiData = [
-    {
-      "name": "yoon",
-      "team": "red",
-      "xp": 0,
-    },
-    {
-      "name": "nico",
-      "team": "red",
-      "xp": 0,
-    },
-    {
-      "name": "lynn",
-      "team": "red",
-      "xp": 0,
-    }
-  ];
-
-  apiData.forEach((playerJson) {
-    var player = Player.fromJson(playerJson);
-    player.sayHello();
-  });
+  /*
+  var yoon = Player(name: 'yoon', xp: 1200, team: 'red');
+  yoon.name = 'J';
+  yoon.xp = 1500;
+  yoon.team = 'blue';
+  */
+  //Cascade operator 위와 같음
+  var yoon = Player(name: 'yoon', xp: 1200, team: 'red')
+    ..name = 'J'
+    ..xp = 1500
+    ..team = 'blue'
+    ..sayHello();
 }
