@@ -2,9 +2,18 @@ class Player {
   //final 사용 시 변경 불가
   final String name;
   int xp;
+  String team;
+  int age;
 
   //constructor method의 이름은 class의 이름과 같아야 함. arguments 위치 중요, 위에 타입을 정했기 때문에 따로 지정 필요 없음
-  Player(this.name, this.xp);
+  //Player(this.name, this.xp, this.team, this.age);
+
+  //named constructor로 변경
+  Player(
+      {required this.name,
+      required this.xp,
+      required this.team,
+      required this.age});
 
   //class method 내에서 this는 사용하지 않는 것이 권고됨
   void sayHello() {
@@ -26,6 +35,14 @@ class Player {
 */
 
 void main() {
-  var player = Player("yoon", 1500);
+  //positional
+  //var player = Player("yoon", 1500, 'red', 12);
+  //named
+  var player = Player(
+    name: "yoon",
+    xp: 1500,
+    age: 12,
+    team: "blue",
+  );
   player.sayHello();
 }
