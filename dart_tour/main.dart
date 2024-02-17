@@ -1,9 +1,8 @@
 class Player {
   //final 사용 시 변경 불가
   final String name;
-  int xp;
+  int xp, age;
   String team;
-  int age;
 
   //constructor method의 이름은 class의 이름과 같아야 함. arguments 위치 중요, 위에 타입을 정했기 때문에 따로 지정 필요 없음
   //Player(this.name, this.xp, this.team, this.age);
@@ -19,6 +18,22 @@ class Player {
   void sayHello() {
     print("Hi my name is $name and my xp is $xp");
   }
+
+  //name, age만 parameters로 받고 나머지는 기본값으로 초기화하는 방법
+  //named constructor
+  Player.createBluePlyaer({
+    required String name,
+    required int age,
+  })  : this.age = age,
+        this.name = name,
+        this.team = 'blue',
+        this.xp = 0;
+  //positional constructor. 이 경우 parameters는 무조건 required임
+  Player.createRedPlayer(String name, int age)
+      : this.age = age,
+        this.name = name,
+        this.team = 'red',
+        this.xp = 0;
 }
 
 /* 위 constructor가 축약형
@@ -45,4 +60,7 @@ void main() {
     team: "blue",
   );
   player.sayHello();
+
+  var bluePlayer = Player.createBluePlyaer(name: 'blue', age: 12);
+  var redPlayer = Player.createRedPlayer('red', 12);
 }
