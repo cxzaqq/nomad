@@ -1,8 +1,11 @@
+//실수를 줄여줌
+enum Team { red, blue }
+
 class Player {
   //final 사용 시 변경 불가
   String name;
   int xp;
-  String team;
+  Team team;
 
   //constructor method의 이름은 class의 이름과 같아야 함. arguments 위치 중요, 위에 타입을 정했기 때문에 따로 지정 필요 없음
   //Player(this.name, this.xp, this.team, this.age);
@@ -25,12 +28,12 @@ class Player {
     required String name,
     required int age,
   })  : this.name = name,
-        this.team = 'blue',
+        this.team = Team.blue,
         this.xp = 0;
   //positional constructor. 이 경우 parameters는 무조건 required임
   Player.createRedPlayer(String name, int age)
       : this.name = name,
-        this.team = 'red',
+        this.team = Team.red,
         this.xp = 0;
 
   Player.fromJson(Map<String, dynamic> playerJson)
@@ -54,15 +57,15 @@ class Player {
 
 void main() {
   /*
-  var yoon = Player(name: 'yoon', xp: 1200, team: 'red');
+  var yoon = Player(name: 'yoon', xp: 1200, team: Team.red);
   yoon.name = 'J';
   yoon.xp = 1500;
-  yoon.team = 'blue';
+  yoon.team = Team.blue;
   */
   //Cascade operator 위와 같음
-  var yoon = Player(name: 'yoon', xp: 1200, team: 'red')
+  var yoon = Player(name: 'yoon', xp: 1200, team: Team.red)
     ..name = 'J'
     ..xp = 1500
-    ..team = 'blue'
+    ..team = Team.blue
     ..sayHello();
 }
