@@ -1,26 +1,31 @@
-class Human {
-  final String name;
-  Human({required this.name});
-  void sayHello() {
-    print("hi my name is $name");
+//Mixin은 생성자가 없는 클래스. 클래스에 프로퍼티들을 추가할 때 등 사용
+mixin class Strong {
+  final double strLevel = 1500.99;
+}
+
+mixin class QuickRunner {
+  void runQuick() {
+    print("ruuuuun!");
   }
 }
 
 enum Team { blue, red }
 
-class Player extends Human {
+class Player with Strong, QuickRunner {
   final Team team;
-  //super라는 키워드로 부모 클래스와 상호작용 가능
+
   Player({
     required this.team,
-    required String name,
-  }) : super(name: name);
-
-  @override
-  void sayHello() {
-    super.sayHello();
-    print('and I play for ${team}');
-  }
+  });
 }
 
-void main() {}
+class Horse with Strong, QuickRunner {}
+
+class kid with QuickRunner {}
+
+void main() {
+  var player = Player(
+    team: Team.red,
+  );
+  player.runQuick();
+}
